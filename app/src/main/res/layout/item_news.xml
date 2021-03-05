@@ -61,6 +61,13 @@
                     android:textColor="@color/black"
                     android:text="@string/link" />
 
+                <TextView
+                    android:id="@+id/tvPubDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="@string/author" />
+
             </LinearLayout>
 
 
