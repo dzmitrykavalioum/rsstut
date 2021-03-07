@@ -12,11 +12,21 @@ import com.dzmitrykavalioum.rsstut.model.Article1
 
 class NewsAdapter(private val listItems: List<Article1>) :
     RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
-    class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    var onItemClick: ((Article1) -> Unit)? = null
+    @SuppressLint("ResourceAsColor")
+    inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val ivTitle: ImageView = itemView.findViewById(R.id.ivTitle)
         val tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         val tvLink: TextView = itemView.findViewById(R.id.tvLink)
         val tvPubDate: TextView = itemView.findViewById(R.id.tvPubDate)
+        init {
+            itemView.setOnClickListener {
+                //TODO test for change text color when article has been reading
+                tvTitle.setTextColor(R.color.grey)
+                onItemClick?.invoke(listItems[position])
+            }
+        }
 
     }
 

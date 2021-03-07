@@ -5,6 +5,8 @@ import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
 
+import java.io.Serializable;
+
 /*<item>
 		<title>Носкевич: Уголовное дело Тихановского до конца месяца будет передано прокурору для направления в суд</title>
 		<link>https://news.tut.by/economics/721251.html?utm_campaign=news-feed&#x26;utm_medium=rss&#x26;utm_source=rss-news</link>
@@ -22,7 +24,7 @@ import org.simpleframework.xml.Root;
 * */
 
 @Root (name = "item", strict = false)
-public class Article1 {
+public class Article1  implements Serializable {
 
     @Element(name = "title")
     private String title;
