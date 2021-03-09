@@ -1,9 +1,6 @@
-package com.dzmitrykavalioum.rsstut.dao
+package com.dzmitrykavalioum.rsstut.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.dzmitrykavalioum.rsstut.model.News
 import kotlinx.coroutines.flow.Flow
 
@@ -18,4 +15,7 @@ interface NewsDao {
 
     @Query("DELETE FROM news_table")
     suspend fun deleteAll()
+
+    @Delete
+    fun deleteNews()
 }

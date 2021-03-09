@@ -11,5 +11,6 @@ interface MainContract {
 
     interface ViewContract{
         fun showNews(feed: Feed1)
+        fun showError(messge: String)
     }
 }

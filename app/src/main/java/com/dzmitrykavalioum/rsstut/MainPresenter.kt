@@ -22,7 +22,9 @@ class MainPresenter : MainContract.PresenterContract {
         val call: Call<Feed1> = RetrofitInstance.api.getNews()
         call.enqueue(object : Callback<Feed1> {
             override fun onFailure(call: Call<Feed1>, t: Throwable) {
-                    Log.d(TAG,t.message.toString())
+                //TODO do correct messages
+                view?.showError(t.message.toString())
+//                    Log.d(TAG,t.message.toString())
             }
 
             override fun onResponse(call: Call<Feed1>, response: Response<Feed1>) {
@@ -42,4 +44,7 @@ class MainPresenter : MainContract.PresenterContract {
         Log.d(TAG, "update news")
         onViewCreated()
     }
+
+
+
 }

@@ -1,11 +1,10 @@
-package com.dzmitrykavalioum.rsstut
+package com.dzmitrykavalioum.rsstut.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.dzmitrykavalioum.rsstut.dao.NewsDao
 import com.dzmitrykavalioum.rsstut.model.News
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,14 +22,19 @@ abstract class NewsRoomDatabase : RoomDatabase() {
             context: Context,
             scope: CoroutineScope
         ): NewsRoomDatabase {
-            return INSTANCE ?: synchronized(this) {
+            return INSTANCE
+                ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     NewsRoomDatabase::class.java,
                     "news_database"
                 )
                     .fallbackToDestructiveMigration()
-                    .addCallback(NewsDatabaseCallback(scope))
+                    .addCallback(
+                        NewsDatabaseCallback(
+                            scope
+                        )
+                    )
                     .build()
                 INSTANCE = instance
                 instance
@@ -44,7 +48,9 @@ abstract class NewsRoomDatabase : RoomDatabase() {
                 super.onCreate(db)
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.newsDao())
+                        populateDatabase(
+                            database.newsDao()
+                        )
                     }
                 }
             }
@@ -52,8 +58,6 @@ abstract class NewsRoomDatabase : RoomDatabase() {
         }
 
         suspend fun populateDatabase(newsDao: NewsDao) {
-// Start the app with a clean database every time.
-// Not needed if you only populate on creation.
 
         }
     }
